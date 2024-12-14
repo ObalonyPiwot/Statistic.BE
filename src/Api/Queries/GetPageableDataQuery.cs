@@ -44,6 +44,9 @@
     }
     public class GetPageableDataQuery
     {
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string Title { get; set; }
         public List<string> Brand { get; set; } = new List<string>();
         public List<string> Model { get; set; } = new List<string>();
         public List<string> Transmission { get; set; } = new List<string>();
