@@ -7,9 +7,6 @@
         Pie,
         Doughnut
     }
-    public class GetPageableDataQuery
-    {
-    }
     public class DataViewModel
     {
         public string Type{ get; set; }
@@ -35,15 +32,27 @@
     public class BrandModel
     {
         public string Brand { get; set; }
-        public List<string> Model { get; set; }
+        public List<string> Model { get; set; } = new List<string>();
     }
     public class SelectListFromCsvModel
     {
-        public List<string> Brand { get; set; }
-        public List<BrandModel> Model { get; set; }
-        public List<string> Transmission { get; set; }
-        public List<string> Owner { get; set; }
-        public List<string> FuelType { get; set; }
+        public List<string> Brand { get; set; } = new List<string>();
+        public List<BrandModel> Model { get; set; } = new List<BrandModel>();
+        public List<string> Transmission { get; set; } = new List<string>();
+        public List<string> Owner { get; set; } = new List<string>();
+        public List<string> FuelType { get; set; } = new List<string>();
+    }
+    public class GetPageableDataQuery
+    {
+        public List<string> Brand { get; set; } = new List<string>();
+        public List<string> Model { get; set; } = new List<string>();
+        public List<string> Transmission { get; set; } = new List<string>();
+        public List<string> Owner { get; set; } = new List<string>();
+        public List<string> FuelType { get; set; } = new List<string>();
+        public int YearFrom { get; set; }
+        public int YearTo { get; set; }
+        public int KmDrivenFrom { get; set; }
+        public int KmDrivenTo { get; set; }
     }
 
 }
