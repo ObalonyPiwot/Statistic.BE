@@ -72,18 +72,18 @@ namespace Api.Queries
     }
     public class GetPageableDataQuery
     {
-        public string Type { get; set; }
-        public string Name { get; set; }
-        public string Title { get; set; }
-        public List<string> Brand { get; set; } = new List<string>();
-        public List<string> Model { get; set; } = new List<string>();
-        public List<string> Transmission { get; set; } = new List<string>();
-        public List<string> Owner { get; set; } = new List<string>();
-        public List<string> FuelType { get; set; } = new List<string>();
-        public int? YearFrom { get; set; }
-        public int? YearTo { get; set; }
-        public int? KmDrivenFrom { get; set; }
-        public int? KmDrivenTo { get; set; }
+        public string Type { get; set; } = null!;
+        public string Name { get; set; }  = null!;
+        public string Title { get; set; } = null!;
+        public List<string>? Brand { get; set; }
+        public List<string>? Model { get; set; }
+        public List<string>? Transmission { get; set; }
+        public List<string>? Owner { get; set; }
+        public List<string>? FuelType { get; set; }
+        public int? YearFrom { get; set; } = 0;
+        public int? YearTo { get; set; } = int.MaxValue;
+        public int? KmDrivenFrom { get; set; } = 0;
+        public int? KmDrivenTo { get; set; } = int.MaxValue;
     }
 
 }

@@ -59,11 +59,11 @@ namespace MyProject.API.Controllers
                 csvModels = csv.GetRecords<CsvModel>().ToList();
                 csvModels = csvModels
                    .Where(x =>
-                       (!request.Brand.Any() || request.Brand.Contains(x.Brand)) &&
-                       (!request.Model.Any() || request.Model.Contains(x.Model)) &&
-                       (!request.Transmission.Any() || request.Transmission.Contains(x.Transmission)) &&
-                       (!request.Owner.Any() || request.Owner.Contains(x.Owner)) &&
-                       (!request.FuelType.Any() || request.FuelType.Contains(x.FuelType)) &&
+                       (request.Brand == null || request.Brand.Contains(x.Brand)) &&
+                       (request.Model == null || request.Model.Contains(x.Model)) &&
+                       (request.Transmission == null || request.Transmission.Contains(x.Transmission)) &&
+                       (request.Owner == null || request.Owner.Contains(x.Owner)) &&
+                       (request.FuelType == null || request.FuelType.Contains(x.FuelType)) &&
                        (request.YearFrom == null || x.Year >= request.YearFrom) &&
                        (request.YearTo == null || x.Year <= request.YearTo) &&
                        (request.KmDrivenFrom == null || x.KmDrivenVal >= request.KmDrivenFrom) &&
@@ -72,16 +72,16 @@ namespace MyProject.API.Controllers
                    .ToList();
             }
             List<string> labels;
-            if (request.Model.Any())
+            if (request.Model!= null)
                 labels = request.Model;
-            else if (request.Brand.Any())
+            else if (request.Brand != null)
                 labels = request.Brand;
             else
                 labels = csvModels.Select(x=>x.Brand).Distinct().ToList();
             var data = new List<float>();
             foreach (var label in labels)
             {
-                if (request.Model.Any())
+                if (request.Model != null)
                     data.Add(csvModels.Where(x => x.Model == label).Count());
                 else
                     data.Add(csvModels.Where(x => x.Brand == label).Count());
