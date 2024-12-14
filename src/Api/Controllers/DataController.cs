@@ -121,10 +121,10 @@ namespace MyProject.API.Controllers
             }
             var result = new SelectListFromCsvModel()
             {
-                Brand = csvModels.Select(x => x.Brand).Distinct().ToList(),
-                Transmission = csvModels.Select(x => x.Transmission).Distinct().ToList(),
-                Owner = csvModels.Select(x => x.Owner).Distinct().ToList(),
-                FuelType = csvModels.Select(x => x.FuelType).Distinct().ToList(),
+                Brand = csvModels.Select(x => x.Brand).Distinct().OrderBy(x=>x).ToList(),
+                Transmission = csvModels.Select(x => x.Transmission).Distinct().OrderBy(x => x).ToList(),
+                Owner = csvModels.Select(x => x.Owner).Distinct().OrderBy(x => x).ToList(),
+                FuelType = csvModels.Select(x => x.FuelType).Distinct().OrderBy(x => x).ToList(),
             };
             var carModel = new List<BrandModel>();
             foreach(var brand in result.Brand)
@@ -132,7 +132,7 @@ namespace MyProject.API.Controllers
                 carModel.Add(new BrandModel()
                 {
                     Brand = brand,
-                    Model = csvModels.Where(x => x.Brand == brand).Select(x => x.Model).Distinct().ToList()
+                    Model = csvModels.Where(x => x.Brand == brand).Select(x => x.Model).Distinct().OrderBy(x => x).ToList()
                 });
 
             }
