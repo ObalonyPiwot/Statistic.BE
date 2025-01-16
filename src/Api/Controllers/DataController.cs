@@ -78,6 +78,7 @@ namespace MyProject.API.Controllers
                 labels = request.Brand;
             else
                 labels = csvModels.Select(x=>x.Brand).Distinct().ToList();
+            labels = labels.OrderBy(x => x).ToList();
             var data = new List<float>();
             foreach (var label in labels)
             {
@@ -94,6 +95,57 @@ namespace MyProject.API.Controllers
                 Data = data,
                 Labels = labels,
             };
+            result.Add(val);
+            labels = csvModels.Select(x=>x.Transmission).Distinct().ToList();
+            data = new List<float>();
+            labels = labels.OrderBy(x => x).ToList();
+            foreach (var label in labels)
+            {
+                    data.Add(csvModels.Where(x => x.Transmission == label).Count());
+            }
+            val = new DataViewModel()
+            {
+                Type = request.Type,
+                Name = request.Name,
+                Title = request.Title,
+                Data = data,
+                Labels = labels,
+            };
+
+            result.Add(val);
+            labels = csvModels.Select(x=>x.Year.ToString()).Distinct().ToList();
+            data = new List<float>();
+            labels = labels.OrderBy(x => x).ToList();
+            foreach (var label in labels)
+            {
+                data.Add(csvModels.Where(x => x.Year.ToString() == label).Count());
+            }
+            val = new DataViewModel()
+            {
+                Type = request.Type,
+                Name = request.Name,
+                Title = request.Title,
+                Data = data,
+                Labels = labels,
+            };
+
+            result.Add(val);
+            labels = csvModels.Select(x=>x.FuelType).Distinct().ToList();
+            data = new List<float>();
+            labels = labels.OrderBy(x => x).ToList();
+            foreach (var label in labels)
+            {
+                data.Add(csvModels.Where(x => x.FuelType == label).Count());
+            }
+            val = new DataViewModel()
+            {
+                Type = request.Type,
+                Name = request.Name,
+                Title = request.Title,
+                Data = data,
+                Labels = labels,
+            };
+
             result.Add(val);
             return result;
         }
