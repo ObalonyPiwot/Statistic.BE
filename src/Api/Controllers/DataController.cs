@@ -147,6 +147,29 @@ namespace MyProject.API.Controllers
             };
 
             result.Add(val);
+
+
+            if (csvModels.Any())
+            {
+                var kmDrivenValues = csvModels.Select(x => x.KmDrivenVal).ToList();
+                var mean = kmDrivenValues.Average();//srednia
+                var stdDev = Math.Sqrt(kmDrivenValues.Average(v => Math.Pow(v - mean, 2)));//odchylenie
+
+                var statisticsLabels = new List<string> { "Średnia", "Odchylenie standardowe" };
+                var statisticsData = new List<float> { (float)mean, (float)stdDev };
+
+                var statsViewModel = new DataViewModel()
+                {
+                    Type = "bar",
+                    Name = request.Name,
+                    Title = $"{request.Title} - Dane statystyczne przebiegu",
+                    Data = statisticsData,
+                    Labels = statisticsLabels,
+                };
+
+                result.Add(statsViewModel);
+            }
+
             return result;
         }
 
